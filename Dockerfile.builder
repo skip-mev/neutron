@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG GO_VERSION="1.20.0"
+ARG GO_VERSION="1.21.5"
 ARG RUNNER_IMAGE="gcr.io/distroless/static"
 
 # --------------------------------------------------------
@@ -69,4 +69,4 @@ EXPOSE 26656
 EXPOSE 26657
 EXPOSE 1317
 
-ENTRYPOINT ["neutrond"]
+ENTRYPOINT ["neutrond", "start"]
