@@ -2,10 +2,13 @@ package ictest_test
 
 import (
 	"fmt"
+	"testing"
 
 	sdkmath "cosmossdk.io/math"
+	"github.com/stretchr/testify/suite"
 
 	"github.com/cosmos/cosmos-sdk/types/module/testutil"
+	"github.com/neutron-org/neutron/v4/tests/ictest"
 	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
 	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
@@ -78,7 +81,7 @@ var (
 			Denom:          denom,
 			ChainID:        "chain-id-0",
 			Bin:            "neutrond",
-			Bech32Prefix:   "cosmos",
+			Bech32Prefix:   "neutron",
 			CoinType:       "118",
 			GasAdjustment:  gasAdjustment,
 			GasPrices:      fmt.Sprintf("0%s", denom),
@@ -93,4 +96,9 @@ func MakeEncodingConfig() *testutil.TestEncodingConfig {
 	cfg := cosmos.DefaultEncoding()
 	feemarkettypes.RegisterInterfaces(cfg.InterfaceRegistry)
 	return &cfg
+}
+
+func TestE2ETestSuite(t *testing.T) {
+	s := ictest.NewE2ETestSuiteFromSpec(spec)
+	suite.Run(t, s)
 }
