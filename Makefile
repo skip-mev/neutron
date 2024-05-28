@@ -266,10 +266,10 @@ check-proto-format:
 		--workdir /workspace $(PROTO_FORMATTER_IMAGE) \
 		format proto -d --exit-code
 
-TEST_E2E_DEPS = build-docker-image
+TEST_E2E_DEPS = build-docker-image-e2e
 TEST_E2E_TAGS = e2e
 
-build-docker-image:
+build-docker-image-e2e:
 	@echo "Building e2e-test Docker image..."
 	@DOCKER_BUILDKIT=1 docker build -t neutron-e2e -f contrib/images/neutron.e2e.Dockerfile .
 
