@@ -271,7 +271,7 @@ TEST_E2E_TAGS = e2e
 
 docker-build-e2e:
 	@echo "Building e2e-test Docker image..."
-	@DOCKER_BUILDKIT=1 $(DOCKER) buildx build --load --build-context app=. -t neutron-node --build-arg BINARY=neutrond .
+	@DOCKER_BUILDKIT=1 $(DOCKER) build -t neutron-e2e -f Dockerfile .
 
 test-e2e: $(TEST_E2E_DEPS)
 	@echo "Running e2e tests..."

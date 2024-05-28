@@ -1,8 +1,9 @@
 package ictest_test
 
 import (
-	sdkmath "cosmossdk.io/math"
 	"fmt"
+
+	sdkmath "cosmossdk.io/math"
 
 	"github.com/cosmos/cosmos-sdk/types/module/testutil"
 	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
