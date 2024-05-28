@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/cosmos/cosmos-sdk/types/module/testutil"
+	"github.com/neutron-org/neutron/v4/app"
 	"github.com/neutron-org/neutron/v4/tests/ictest"
 	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
 	"github.com/strangelove-ventures/interchaintest/v8"
@@ -94,7 +95,7 @@ var (
 
 func MakeEncodingConfig() *testutil.TestEncodingConfig {
 	cfg := cosmos.DefaultEncoding()
-	feemarkettypes.RegisterInterfaces(cfg.InterfaceRegistry)
+	app.ModuleBasics.RegisterInterfaces(cfg.Codec, cfg.InterfaceRegistry)
 	return &cfg
 }
 
