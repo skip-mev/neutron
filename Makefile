@@ -245,14 +245,14 @@ kill-dev:
 
 build-docker-image:
 	# please keep the image name consistent with https://github.com/neutron-org/neutron-integration-tests/blob/main/setup/docker-compose.yml
-	@docker buildx build --load --build-context app=. -t neutron-node --build-arg BINARY=neutrond .
+	@$(DOCKER) buildx build --load --build-context app=. -t neutron-node --build-arg BINARY=neutrond .
 
 start-docker-container:
 	# please keep the ports consistent with https://github.com/neutron-org/neutron-integration-tests/blob/main/setup/docker-compose.yml
-	@docker run --rm --name neutron -d -p 1317:1317 -p 26657:26657 -p 26656:26656 -p 16657:16657 -p 8090:9090 -e RUN_BACKGROUND=0 neutron-node
+	@$(DOCKER) run --rm --name neutron -d -p 1317:1317 -p 26657:26657 -p 26656:26656 -p 16657:16657 -p 8090:9090 -e RUN_BACKGROUND=0 neutron-node
 
 stop-docker-container:
-	@docker stop neutron
+	@$(DOCKER) stop neutron
 
 mocks:
 	@echo "Regenerate mocks..."
@@ -265,3 +265,14 @@ check-proto-format:
 		$(DOCKER) run --rm -v $(CURDIR):/workspace \
 		--workdir /workspace $(PROTO_FORMATTER_IMAGE) \
 		format proto -d --exit-code
+
+TEST_E2E_DEPS = docker-build-e2e
+TEST_E2E_TAGS = e2e
+
+docker-build-e2e:
+	@echo "Building e2e-test Docker image..."
+	@DOCKER_BUILDKIT=1 $(DOCKER) buildx build --load --build-context app=. -t neutron-node --build-arg BINARY=neutrond .
+
+test-e2e: $(TEST_E2E_DEPS)
+	@echo "Running e2e tests..."
+	@go test ./tests/ictest/e2e_test.go -timeout 30m -p 1 -race -v -tags='$(TEST_E2E_TAGS)'
