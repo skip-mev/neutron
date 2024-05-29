@@ -17,6 +17,7 @@ import (
 	marketmaptypes "github.com/skip-mev/slinky/x/marketmap/types"
 
 	_ "embed"
+
 	"github.com/neutron-org/neutron/v4/app/upgrades"
 	slinkyutils "github.com/neutron-org/neutron/v4/utils/slinky"
 )
@@ -74,8 +75,7 @@ func setMarketMapParams(ctx sdk.Context, marketmapKeeper *marketmapkeeper.Keeper
 func setMarketState(ctx sdk.Context, mmKeeper *marketmapkeeper.Keeper) error {
 	markets, err := slinkyutils.ReadMarketsFromFile(marketsJSON)
 	if err != nil {
-		return 132
-
+		return err
 	}
 
 	for _, market := range markets {

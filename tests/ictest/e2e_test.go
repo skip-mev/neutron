@@ -3,11 +3,12 @@ package ictest_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/icza/dyno"
 	"log"
 	"strconv"
 	"strings"
 	"testing"
+
+	"github.com/icza/dyno"
 
 	sdkmath "cosmossdk.io/math"
 	"github.com/cosmos/cosmos-sdk/types/module/testutil"
