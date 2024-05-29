@@ -1,51 +1,71 @@
-package ictest_test
+package feemarket_test
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"strconv"
-	"strings"
 	"testing"
 
-	"github.com/icza/dyno"
-
 	sdkmath "cosmossdk.io/math"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module/testutil"
+	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/bank"
+	"github.com/cosmos/cosmos-sdk/x/gov"
+	feemarketmodule "github.com/skip-mev/feemarket/x/feemarket"
 	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
+	marketmapmodule "github.com/skip-mev/slinky/x/marketmap"
+	"github.com/skip-mev/slinky/x/oracle"
 	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v8/ibc"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/neutron-org/neutron/v4/app"
 	"github.com/neutron-org/neutron/v4/tests/ictest"
 )
+
+func init() {
+	cfg := sdk.GetConfig()
+	cfg.SetBech32PrefixForAccount("neutron", "neutronpub")
+	cfg.Seal()
+}
 
 var (
 	minBaseFee = sdkmath.LegacyNewDec(10)
 	baseFee    = sdkmath.LegacyNewDec(1000000)
 
-	// config params
-	numValidators = 3
-	numFullNodes  = 1
-	denom         = "stake"
-
 	image = ibc.DockerImage{
 		Repository: "neutron-e2e",
 		Version:    "latest",
+		UidGid:     "1025:1025",
+	}
+
+	numValidators = 4
+	numFullNodes  = 0
+	noHostMount   = false
+	gasAdjustment = 1.5
+
+	oracleImage = ibc.DockerImage{
+		Repository: "ghcr.io/skip-mev/slinky-sidecar",
+		Version:    "latest",
 		UidGid:     "1000:1000",
 	}
-	encodingConfig = &testutil.TestEncodingConfig{
-		InterfaceRegistry: app.MakeEncodingConfig().InterfaceRegistry,
-		Codec:             app.MakeEncodingConfig().Marshaler,
-		TxConfig:          app.MakeEncodingConfig().TxConfig,
-		Amino:             app.MakeEncodingConfig().Amino,
-	}
-	noHostMount   = false
-	gasAdjustment = 10.0
+	encodingConfig = testutil.MakeTestEncodingConfig(
+		bank.AppModuleBasic{},
+		oracle.AppModuleBasic{},
+		gov.AppModuleBasic{},
+		auth.AppModuleBasic{},
+		feemarketmodule.AppModuleBasic{},
+		marketmapmodule.AppModuleBasic{},
+	)
 
-	genesisKV = []cosmos.GenesisKV{
+	defaultGenesisKV = []cosmos.GenesisKV{
+		{
+			Key:   "consensus.params.abci.vote_extensions_enable_height",
+			Value: "2",
+		},
+		{
+			Key:   "consensus.params.block.max_gas",
+			Value: "1000000000",
+		},
 		{
 			Key: "app_state.feemarket.params",
 			Value: feemarkettypes.Params{
@@ -75,71 +95,37 @@ var (
 		},
 	}
 
-	// interchain specification
-	spec = &interchaintest.ChainSpec{
-		ChainName:     "neutron",
-		Name:          "neutron",
+	denom = "untrn"
+	spec  = &interchaintest.ChainSpec{
+		ChainName:     "slinky",
+		Name:          "slinky",
 		NumValidators: &numValidators,
 		NumFullNodes:  &numFullNodes,
 		Version:       "latest",
 		NoHostMount:   &noHostMount,
 		ChainConfig: ibc.ChainConfig{
-			EncodingConfig: encodingConfig,
+			EncodingConfig: &encodingConfig,
 			Images: []ibc.DockerImage{
 				image,
 			},
 			Type:           "cosmos",
-			Name:           "neutron",
+			Name:           "slinky",
 			Denom:          denom,
 			ChainID:        "chain-id-0",
 			Bin:            "neutrond",
 			Bech32Prefix:   "neutron",
-			SkipGenTx:      false,
 			CoinType:       "118",
 			GasAdjustment:  gasAdjustment,
 			GasPrices:      fmt.Sprintf("0%s", denom),
 			TrustingPeriod: "48h",
 			NoHostMount:    noHostMount,
-			ModifyGenesis:  ModifyGenesis(genesisKV),
+			ModifyGenesis:  cosmos.ModifyGenesis(defaultGenesisKV),
+			SkipGenTx:      true,
 		},
 	}
 )
 
 func TestE2ETestSuite(t *testing.T) {
-	s := ictest.NewE2ETestSuiteFromSpec(spec)
+	s := feemarket.NewE2ETestSuiteFromSpec(spec)
 	suite.Run(t, s)
-}
-
-func ModifyGenesis(genesisKV []cosmos.GenesisKV) func(ibc.ChainConfig, []byte) ([]byte, error) {
-	return func(chainConfig ibc.ChainConfig, genbz []byte) ([]byte, error) {
-		g := make(map[string]interface{})
-		if err := json.Unmarshal(genbz, &g); err != nil {
-			return nil, fmt.Errorf("failed to unmarshal genesis file: %w", err)
-		}
-
-		for idx, values := range genesisKV {
-			splitPath := strings.Split(values.Key, ".")
-
-			path := make([]interface{}, len(splitPath))
-			for i, component := range splitPath {
-				if v, err := strconv.Atoi(component); err == nil {
-					path[i] = v
-				} else {
-					path[i] = component
-				}
-			}
-
-			if err := dyno.Set(g, values.Value, path...); err != nil {
-				return nil, fmt.Errorf("failed to set value (index:%d) in genesis json: %w", idx, err)
-			}
-		}
-
-		log.Fatal(g)
-
-		out, err := json.Marshal(g)
-		if err != nil {
-			return nil, fmt.Errorf("failed to marshal genesis bytes to json: %w", err)
-		}
-		return out, nil
-	}
 }

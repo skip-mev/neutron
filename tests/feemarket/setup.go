@@ -1,4 +1,4 @@
-package ictest
+package feemarket
 
 import (
 	"archive/tar"
@@ -50,7 +50,7 @@ type KeyringOverride struct {
 // and returns the associated chain
 func ChainBuilderFromChainSpec(t *testing.T, spec *interchaintest.ChainSpec) ibc.Chain {
 	// require that NumFullNodes == NumValidators == 3
-	require.Equal(t, *spec.NumValidators, 3)
+	require.Equal(t, *spec.NumValidators, 4)
 
 	cf := interchaintest.NewBuiltinChainFactory(zaptest.NewLogger(t), []*interchaintest.ChainSpec{spec})
 

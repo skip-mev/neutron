@@ -50,9 +50,6 @@ var (
 		marketmapmodule.AppModuleBasic{},
 	)
 
-	VotingPeriod     = "10s"
-	MaxDepositPeriod = "1s"
-
 	defaultGenesisKV = []cosmos.GenesisKV{
 		{
 			Key:   "consensus.params.abci.vote_extensions_enable_height",

@@ -136,7 +136,12 @@ build-slinky-e2e-docker-image: go.sum $(BUILDDIR)/
 		-f Dockerfile.builder .
 
 slinky-e2e-test: build-slinky-e2e-docker-image
+	@echo "Running e2e slinky tests..."
 	cd ./tests/slinky && go mod tidy && go test -v -race -timeout 20m ./...
+
+feemarket-e2e-test: build-slinky-e2e-docker-image
+	@echo "Running e2e feemarket tests..."
+	@cd ./tests/feemarket &&  go mod tidy && go test -p 1 -v -race -timeout 30m ./...
 
 install-test-binary: check_version go.sum
 	go install -mod=readonly $(BUILD_FLAGS_TEST_BINARY) ./cmd/neutrond
@@ -282,14 +287,3 @@ check-proto-format:
 		$(DOCKER) run --rm -v $(CURDIR):/workspace \
 		--workdir /workspace $(PROTO_FORMATTER_IMAGE) \
 		format proto -d --exit-code
-
-TEST_E2E_DEPS = build-docker-image
-TEST_E2E_TAGS = e2e
-
-build-docker-image-e2e:
-	@echo "Building e2e-test Docker image..."
-	@DOCKER_BUILDKIT=1 docker build -t neutron-e2e -f contrib/images/neutron.e2e.Dockerfile .
-
-test-e2e: $(TEST_E2E_DEPS)
-	@echo "Running e2e tests..."
-	@cd ./tests/ictest &&  go test -p 1 -v -race -timeout 30m
