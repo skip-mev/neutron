@@ -5,8 +5,6 @@ import (
 	"math/rand"
 	"sync"
 
-	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
-
 	"cosmossdk.io/math"
 
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -171,7 +169,10 @@ func (s *TestSuite) TestSendTxDecrease() {
 
 	baseFee := s.QueryBaseFee()
 	gas := int64(200000)
-	minBaseFee := baseFee.MulDec(math.LegacyNewDec(gas))[0]
+	minBaseFee := sdk.DecCoin{
+		Denom:  baseFee.Denom,
+		Amount: baseFee.Amount.MulInt64(gas),
+	}
 	minBaseFeeCoins := sdk.NewCoins(sdk.NewCoin(minBaseFee.Denom, minBaseFee.Amount.TruncateInt()))
 	sendAmt := int64(100000)
 
@@ -235,7 +236,7 @@ func (s *TestSuite) TestSendTxDecrease() {
 			fee := s.QueryBaseFee()
 			s.T().Log("base fee", fee.String())
 
-			if fee.AmountOf(feemarkettypes.DefaultFeeDenom).Equal(params.MinBaseFee) {
+			if fee.Equal(params.MinBaseFee) {
 				break
 			}
 		}
@@ -275,7 +276,10 @@ func (s *TestSuite) TestSendTxIncrease() {
 		for {
 			// send with the exact expected fee
 			baseFee = s.QueryBaseFee()
-			minBaseFee := baseFee.MulDec(math.LegacyNewDec(gas))[0]
+			minBaseFee := sdk.DecCoin{
+				Denom:  baseFee.Denom,
+				Amount: baseFee.Amount.MulInt64(gas),
+			}
 			// add headroom
 			minBaseFeeCoins := sdk.NewCoins(sdk.NewCoin(minBaseFee.Denom, minBaseFee.Amount.Add(math.LegacyNewDec(10)).TruncateInt()))
 
@@ -334,7 +338,7 @@ func (s *TestSuite) TestSendTxIncrease() {
 			baseFee = s.QueryBaseFee()
 			s.T().Log("base fee", baseFee.String())
 
-			if baseFee.AmountOf(feemarkettypes.DefaultFeeDenom).GT(math.LegacyNewDec(1000000)) {
+			if baseFee.Amount.GT(math.LegacyNewDec(1000000)) {
 				break
 			}
 		}
@@ -348,7 +352,7 @@ func (s *TestSuite) TestSendTxIncrease() {
 		fee := s.QueryBaseFee()
 		s.T().Log("base fee", fee.String())
 
-		amt, err := s.chain.GetBalance(context.Background(), s.user1.FormattedAddress(), baseFee[0].Denom)
+		amt, err := s.chain.GetBalance(context.Background(), s.user1.FormattedAddress(), baseFee.Denom)
 		s.Require().NoError(err)
 		s.Require().True(amt.LT(math.NewInt(initBalance)), amt)
 		s.T().Log("balance:", amt.String())

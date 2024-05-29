@@ -266,7 +266,7 @@ check-proto-format:
 		--workdir /workspace $(PROTO_FORMATTER_IMAGE) \
 		format proto -d --exit-code
 
-TEST_E2E_DEPS = build-docker-image-e2e
+TEST_E2E_DEPS = build-docker-image
 TEST_E2E_TAGS = e2e
 
 build-docker-image-e2e:
