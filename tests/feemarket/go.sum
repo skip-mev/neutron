@@ -1061,6 +1061,7 @@ github.com/skip-mev/feemarket v1.0.0-beta.0 h1:Q1nuX6KVhyN/sOOAs6mLkaQUG8yQvUMMn
 github.com/skip-mev/feemarket v1.0.0-beta.0/go.mod h1:xBs2ZCqpo+S9HhHNOqDVV7kHj8lO8ZIA+l66pMUdqbE=
 github.com/skip-mev/feemarket/tests/e2e v1.1.0 h1:uA9TmvqjGwxdh7c6YG4a8sDPfAbct++nRFI9jzDm700=
 github.com/skip-mev/feemarket/tests/e2e v1.1.0/go.mod h1:4Ym5t9q6bEP+3Bl7fWrO6jNP/K3djCQ7hDSGXkzfALw=
+github.com/skip-mev/feemarket/tests/e2e v1.2.0/go.mod h1:LdeyBDNMJZUxdwCAgU4mRNIyjSyeZggtNYwWLwLmQiI=
 github.com/skip-mev/slinky v0.4.6 h1:XODpNhaF7WJPylpjZLns6mxfcANunCi5mrr5cTSVBvo=
 github.com/skip-mev/slinky v0.4.6/go.mod h1:AfPB9XOT50c6GXvRLO67Aw3iHw7hQhjuMaASpDFjRSM=
 github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d/go.mod h1:OnSkiWE9lh6wB0YB77sQom3nweQdgAjqCqsofrRNTgc=
@@ -1092,6 +1093,7 @@ github.com/spf13/viper v1.18.2 h1:LUXCnvUvSM6FXAsj6nnfc8Q2tp1dIgUfY9Kc8GsSOiQ=
 github.com/spf13/viper v1.18.2/go.mod h1:EKmWIqdnk5lOcmR72yw6hS+8OPYcwD0jteitLMVB+yk=
 github.com/strangelove-ventures/interchaintest/v8 v8.3.0 h1:1XyATc0JkvzDhBS71CdpM5z1t6bmO9PgH/5/nffoM9Q=
 github.com/strangelove-ventures/interchaintest/v8 v8.3.0/go.mod h1:5goHQtgWO9khoUO/SfR//w3uaw/uYVriDR1OY6PyydM=
+github.com/strangelove-ventures/interchaintest/v8 v8.3.1-0.20240510203915-0559b76de4fa/go.mod h1:5goHQtgWO9khoUO/SfR//w3uaw/uYVriDR1OY6PyydM=
 github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
 github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
 github.com/streadway/handy v0.0.0-20190108123426-d5acb3125c2a/go.mod h1:qNTQ5P5JnDBl6z3cMAg/SywNDC5ABu5ApDIw6lUbRmI=

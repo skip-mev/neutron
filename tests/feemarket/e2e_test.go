@@ -38,6 +38,12 @@ var (
 		UidGid:     "1025:1025",
 	}
 
+	oracleImage = ibc.DockerImage{
+		Repository: "ghcr.io/skip-mev/slinky-sidecar",
+		Version:    "latest",
+		UidGid:     "1000:1000",
+	}
+
 	numValidators = 4
 	numFullNodes  = 0
 	noHostMount   = false
@@ -121,7 +127,9 @@ var (
 )
 
 func TestE2ETestSuite(t *testing.T) {
-	s := e2e.NewIntegrationSuite(spec,
+	s := e2e.NewIntegrationSuite(
+		spec,
+		oracleImage,
 		e2e.WithInterchainConstructor(e2e.CCVInterchainConstructor),
 		e2e.WithChainConstructor(e2e.CCVChainConstructor),
 		e2e.WithDenom(denom),
