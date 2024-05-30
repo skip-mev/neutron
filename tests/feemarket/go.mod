@@ -3,34 +3,19 @@ module github.com/neutron-org/neutron/v4/tests/ictest
 go 1.22.3
 
 replace (
-	cosmossdk.io/client/v2 => cosmossdk.io/client/v2 v2.0.0-beta.1.0.20240124105859-5ad1805d0e79
-
-	// TODO: update our cosmos-sdk up to 0.50.6+ to remove downgrade of upgrade modules cosmossdk.io/x/{evidence,feegrant,upgrade}
-	cosmossdk.io/x/evidence => cosmossdk.io/x/evidence v0.1.0
-	cosmossdk.io/x/feegrant => cosmossdk.io/x/feegrant v0.1.0
-	cosmossdk.io/x/upgrade => cosmossdk.io/x/upgrade v0.1.1
-	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
+	cosmossdk.io/core => cosmossdk.io/core v0.11.0
 	github.com/ChainSafe/go-schnorrkel => github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d
-	github.com/ChainSafe/go-schnorrkel/1 => github.com/ChainSafe/go-schnorrkel v1.1.0
-	github.com/CosmWasm/wasmd => github.com/neutron-org/wasmd v0.45.1-0.20240501180153-d9bebe629e05
-	github.com/cosmos/admin-module => github.com/neutron-org/admin-module v1.0.2-0.20240402143659-7dcb4a8c2056
-	github.com/cosmos/cosmos-sdk => github.com/neutron-org/cosmos-sdk v0.50.0-beta.0.0.20240226131019-8efae68de5cc
+	github.com/ChainSafe/go-schnorrkel/1 => github.com/ChainSafe/go-schnorrkel v1.0.0
+	github.com/docker/distribution => github.com/docker/distribution v2.8.2+incompatible
+	github.com/docker/docker => github.com/docker/docker v24.0.9+incompatible
 	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
-	github.com/neutron-org/neutron/v4 => ../../
-	github.com/prometheus/client_golang => github.com/prometheus/client_golang v1.18.0
-	github.com/prometheus/client_model => github.com/prometheus/client_model v0.6.0
-	github.com/prometheus/common => github.com/prometheus/common v0.47.0
-	github.com/prometheus/procfs => github.com/prometheus/procfs v0.12.0
-	github.com/skip-mev/feemarket => github.com/neutron-org/feemarket v0.0.0-20240527102030-5f3610192e23
-	//github.com/skip-mev/feemarket => ../feemarket
-	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
 	github.com/vedhavyas/go-subkey => github.com/strangelove-ventures/go-subkey v1.0.7
 )
 
 require (
 	cosmossdk.io/math v1.3.0
 	github.com/cosmos/cosmos-sdk v0.50.6
-	github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240520161032-284047ab934c
+	github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240530200723-e1a7ed7c359c
 	github.com/skip-mev/feemarket/tests/e2e v1.1.0
 	github.com/skip-mev/slinky v0.4.6
 	github.com/strangelove-ventures/interchaintest/v8 v8.3.0

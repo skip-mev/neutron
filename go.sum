@@ -1320,8 +1320,8 @@ github.com/skip-mev/block-sdk/v2 v2.1.2 h1:fNKbrb+PVVzuU0JiSuWgBV4Afj5zZ1VeHQJp8
 github.com/skip-mev/block-sdk/v2 v2.1.2/go.mod h1:kIq7SMva0/eHKTCiG/oI5XGxD4HNVK0t71TrUZqHcvA=
 github.com/skip-mev/chaintestutil v0.0.0-20240514161515-056d7ba45610 h1:4JlsiRVt/YZOvrKH525T7sZXgEWUEjqSDMwE6fXNbdo=
 github.com/skip-mev/chaintestutil v0.0.0-20240514161515-056d7ba45610/go.mod h1:kB8gFZX07CyJnw8q9iEZijI3qJTIe1K/Y++P5VGkrcg=
-github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240529211541-57d7094237da h1:Kt4S+/njjYUQI28G2Esqx0ZZvJC5zUOrNV7D0NTUi2w=
-github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240529211541-57d7094237da/go.mod h1:xBs2ZCqpo+S9HhHNOqDVV7kHj8lO8ZIA+l66pMUdqbE=
+github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240530200723-e1a7ed7c359c h1:lEl6Ene0+lT6m5q7NJm+1xNJt7tggUnxEQdUOHRbAhY=
+github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240530200723-e1a7ed7c359c/go.mod h1:xBs2ZCqpo+S9HhHNOqDVV7kHj8lO8ZIA+l66pMUdqbE=
 github.com/skip-mev/slinky v0.4.3 h1:4LWqeDa2and84GXG3HgAAmDa145+TG2WQ0uRDAU7AzA=
 github.com/skip-mev/slinky v0.4.3/go.mod h1:6LkqFirdIh1FfHijGyRf1MeiBgVshDseTH/jHTOVQVs=
 github.com/sourcegraph/conc v0.3.0 h1:OQTbbt6P72L20UqAkXXuLOj79LfEanQ+YQFNpLA9ySo=
