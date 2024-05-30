@@ -28,8 +28,8 @@ func init() {
 }
 
 var (
-	minBaseFee = sdkmath.LegacyNewDec(10)
-	baseFee    = sdkmath.LegacyNewDec(1000000)
+	minGasPrice = sdkmath.LegacyNewDec(10)
+	gasPrice    = sdkmath.LegacyNewDec(1000000)
 
 	image = ibc.DockerImage{
 		Repository: "neutron-e2e",
@@ -67,7 +67,7 @@ var (
 				Beta:                   feemarkettypes.DefaultBeta,
 				Theta:                  feemarkettypes.DefaultTheta,
 				Delta:                  feemarkettypes.DefaultDelta,
-				MinBaseFee:             minBaseFee,
+				MinBaseGasPrice:        minGasPrice,
 				MinLearningRate:        feemarkettypes.DefaultMinLearningRate,
 				MaxLearningRate:        feemarkettypes.DefaultMaxLearningRate,
 				TargetBlockUtilization: feemarkettypes.DefaultTargetBlockUtilization / 4,
@@ -81,7 +81,7 @@ var (
 		{
 			Key: "app_state.feemarket.state",
 			Value: feemarkettypes.State{
-				BaseFee:      baseFee,
+				BaseGasPrice: gasPrice,
 				LearningRate: feemarkettypes.DefaultMaxLearningRate,
 				Window:       make([]uint64, feemarkettypes.DefaultWindow),
 				Index:        0,
