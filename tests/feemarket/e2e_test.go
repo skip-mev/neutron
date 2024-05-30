@@ -3,6 +3,7 @@ package feemarket_test
 import (
 	"fmt"
 	"github.com/stretchr/testify/suite"
+	"strconv"
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
@@ -58,7 +59,7 @@ var (
 		},
 		{
 			Key:   "consensus.params.block.max_gas",
-			Value: feemarkettypes.DefaultMaxBlockUtilization,
+			Value: strconv.Itoa(int(feemarkettypes.DefaultMaxBlockUtilization)),
 		},
 		{
 			Key: "app_state.feemarket.params",
@@ -91,8 +92,8 @@ var (
 
 	denom = "untrn"
 	spec  = &interchaintest.ChainSpec{
-		ChainName:     "slinky",
-		Name:          "slinky",
+		ChainName:     "feemarket",
+		Name:          "feemarket",
 		NumValidators: &numValidators,
 		NumFullNodes:  &numFullNodes,
 		Version:       "latest",
@@ -103,7 +104,7 @@ var (
 				image,
 			},
 			Type:           "cosmos",
-			Name:           "slinky",
+			Name:           "feemarket",
 			Denom:          denom,
 			ChainID:        "chain-id-0",
 			Bin:            "neutrond",
