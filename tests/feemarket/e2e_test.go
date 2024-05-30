@@ -121,6 +121,8 @@ var (
 
 func TestE2ETestSuite(t *testing.T) {
 	s := e2e.NewIntegrationSuite(spec,
+		e2e.WithInterchainConstructor(e2e.CCVInterchainConstructor),
+		e2e.WithChainConstructor(e2e.CCVChainConstructor),
 		e2e.WithDenom(denom),
 	)
 	suite.Run(t, s)
