@@ -33,6 +33,7 @@ require (
 	github.com/cosmos/cosmos-sdk v0.50.6
 	github.com/skip-mev/chaintestutil v0.0.0-20240514161515-056d7ba45610
 	github.com/skip-mev/feemarket v0.0.1-alpha.2.0.20240520161032-284047ab934c
+	github.com/skip-mev/feemarket/tests/e2e v1.0.0
 	github.com/skip-mev/slinky v0.4.6
 	github.com/strangelove-ventures/interchaintest/v8 v8.3.0
 	github.com/stretchr/testify v1.9.0
@@ -248,7 +249,6 @@ require (
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.49.0 // indirect
 	go.opentelemetry.io/otel v1.26.0 // indirect
 	go.opentelemetry.io/otel/metric v1.26.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.26.0 // indirect
 	go.opentelemetry.io/otel/trace v1.26.0 // indirect
 	go.uber.org/mock v0.4.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

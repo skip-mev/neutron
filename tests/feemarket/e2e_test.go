@@ -2,6 +2,7 @@ package feemarket_test
 
 import (
 	"fmt"
+	"github.com/stretchr/testify/suite"
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
@@ -10,6 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/cosmos/cosmos-sdk/x/gov"
+	"github.com/skip-mev/feemarket/tests/e2e"
 	feemarketmodule "github.com/skip-mev/feemarket/x/feemarket"
 	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
 	marketmapmodule "github.com/skip-mev/slinky/x/marketmap"
@@ -17,9 +19,6 @@ import (
 	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v8/ibc"
-	"github.com/stretchr/testify/suite"
-
-	"github.com/neutron-org/neutron/v4/tests/ictest"
 )
 
 func init() {
@@ -43,11 +42,6 @@ var (
 	noHostMount   = false
 	gasAdjustment = 1.5
 
-	oracleImage = ibc.DockerImage{
-		Repository: "ghcr.io/skip-mev/slinky-sidecar",
-		Version:    "latest",
-		UidGid:     "1000:1000",
-	}
 	encodingConfig = testutil.MakeTestEncodingConfig(
 		bank.AppModuleBasic{},
 		oracle.AppModuleBasic{},
@@ -64,7 +58,7 @@ var (
 		},
 		{
 			Key:   "consensus.params.block.max_gas",
-			Value: "1000000000",
+			Value: feemarkettypes.DefaultMaxBlockUtilization,
 		},
 		{
 			Key: "app_state.feemarket.params",
@@ -126,6 +120,8 @@ var (
 )
 
 func TestE2ETestSuite(t *testing.T) {
-	s := feemarket.NewE2ETestSuiteFromSpec(spec)
+	s := e2e.NewIntegrationSuite(spec,
+		e2e.WithDenom(denom),
+	)
 	suite.Run(t, s)
 }
