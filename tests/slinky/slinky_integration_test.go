@@ -1,6 +1,7 @@
 package slinky_test
 
 import (
+	sdkmath "cosmossdk.io/math"
 	"fmt"
 	"testing"
 
@@ -8,6 +9,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	"github.com/cosmos/cosmos-sdk/x/gov"
+	feemarketmodule "github.com/skip-mev/feemarket/x/feemarket"
+	feemarkettypes "github.com/skip-mev/feemarket/x/feemarket/types"
 	"github.com/strangelove-ventures/interchaintest/v8"
 	"github.com/strangelove-ventures/interchaintest/v8/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v8/ibc"
@@ -26,6 +29,9 @@ func init() {
 }
 
 var (
+	minGasPrice = sdkmath.LegacyNewDec(10)
+	gasPrice    = sdkmath.LegacyNewDec(1000000)
+
 	image = ibc.DockerImage{
 		Repository: "neutron-node",
 		Version:    "latest",
@@ -48,6 +54,7 @@ var (
 		gov.AppModuleBasic{},
 		auth.AppModuleBasic{},
 		marketmapmodule.AppModuleBasic{},
+		feemarketmodule.AppModuleBasic{},
 	)
 
 	defaultGenesisKV = []cosmos.GenesisKV{
@@ -58,6 +65,34 @@ var (
 		{
 			Key:   "consensus.params.block.max_gas",
 			Value: "1000000000",
+		},
+		{
+			Key: "app_state.feemarket.params",
+			Value: feemarkettypes.Params{
+				Alpha:                  feemarkettypes.DefaultAlpha,
+				Beta:                   feemarkettypes.DefaultBeta,
+				Theta:                  feemarkettypes.DefaultTheta,
+				Delta:                  feemarkettypes.DefaultDelta,
+				MinBaseGasPrice:        minGasPrice,
+				MinLearningRate:        feemarkettypes.DefaultMinLearningRate,
+				MaxLearningRate:        feemarkettypes.DefaultMaxLearningRate,
+				TargetBlockUtilization: feemarkettypes.DefaultTargetBlockUtilization / 4,
+				MaxBlockUtilization:    feemarkettypes.DefaultMaxBlockUtilization,
+				Window:                 feemarkettypes.DefaultWindow,
+				FeeDenom:               feemarkettypes.DefaultFeeDenom,
+				// DISABLE
+				Enabled:        false,
+				DistributeFees: false,
+			},
+		},
+		{
+			Key: "app_state.feemarket.state",
+			Value: feemarkettypes.State{
+				BaseGasPrice: gasPrice,
+				LearningRate: feemarkettypes.DefaultMaxLearningRate,
+				Window:       make([]uint64, feemarkettypes.DefaultWindow),
+				Index:        0,
+			},
 		},
 	}
 

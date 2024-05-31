@@ -13,7 +13,9 @@ replace (
 )
 
 require (
+	cosmossdk.io/math v1.3.0
 	github.com/cosmos/cosmos-sdk v0.50.6
+	github.com/skip-mev/feemarket v1.0.0-beta.0
 	github.com/skip-mev/slinky v0.4.6
 	github.com/skip-mev/slinky/tests/integration v1.0.0
 	github.com/strangelove-ventures/interchaintest/v8 v8.3.1-0.20240510203915-0559b76de4fa
@@ -33,7 +35,6 @@ require (
 	cosmossdk.io/depinject v1.0.0-alpha.4 // indirect
 	cosmossdk.io/errors v1.0.1 // indirect
 	cosmossdk.io/log v1.3.1 // indirect
-	cosmossdk.io/math v1.3.0 // indirect
 	cosmossdk.io/store v1.1.0 // indirect
 	cosmossdk.io/x/evidence v0.1.1 // indirect
 	cosmossdk.io/x/feegrant v0.1.1 // indirect

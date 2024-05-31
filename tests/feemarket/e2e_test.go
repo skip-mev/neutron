@@ -82,8 +82,9 @@ var (
 				MaxBlockUtilization:    feemarkettypes.DefaultMaxBlockUtilization,
 				Window:                 feemarkettypes.DefaultWindow,
 				FeeDenom:               feemarkettypes.DefaultFeeDenom,
-				Enabled:                true,
-				DistributeFees:         false,
+				// DISABLE
+				Enabled:        false,
+				DistributeFees: false,
 			},
 		},
 		{
