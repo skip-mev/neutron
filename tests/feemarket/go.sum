@@ -1059,8 +1059,7 @@ github.com/skip-mev/chaintestutil v0.0.0-20240514161515-056d7ba45610 h1:4JlsiRVt
 github.com/skip-mev/chaintestutil v0.0.0-20240514161515-056d7ba45610/go.mod h1:kB8gFZX07CyJnw8q9iEZijI3qJTIe1K/Y++P5VGkrcg=
 github.com/skip-mev/feemarket v1.0.0-beta.0 h1:Q1nuX6KVhyN/sOOAs6mLkaQUG8yQvUMMn7IHTFSKztw=
 github.com/skip-mev/feemarket v1.0.0-beta.0/go.mod h1:xBs2ZCqpo+S9HhHNOqDVV7kHj8lO8ZIA+l66pMUdqbE=
-github.com/skip-mev/feemarket/tests/e2e v1.1.0 h1:uA9TmvqjGwxdh7c6YG4a8sDPfAbct++nRFI9jzDm700=
-github.com/skip-mev/feemarket/tests/e2e v1.1.0/go.mod h1:4Ym5t9q6bEP+3Bl7fWrO6jNP/K3djCQ7hDSGXkzfALw=
+github.com/skip-mev/feemarket/tests/e2e v1.2.0 h1:csFD9yvBnjyvZIJWq+LG/oM7ttJ2CYxWtqZ5Rd38Gpc=
 github.com/skip-mev/feemarket/tests/e2e v1.2.0/go.mod h1:LdeyBDNMJZUxdwCAgU4mRNIyjSyeZggtNYwWLwLmQiI=
 github.com/skip-mev/slinky v0.4.6 h1:XODpNhaF7WJPylpjZLns6mxfcANunCi5mrr5cTSVBvo=
 github.com/skip-mev/slinky v0.4.6/go.mod h1:AfPB9XOT50c6GXvRLO67Aw3iHw7hQhjuMaASpDFjRSM=
@@ -1091,8 +1090,7 @@ github.com/spf13/pflag v1.0.5/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An
 github.com/spf13/viper v1.3.2/go.mod h1:ZiWeW+zYFKm7srdB9IoDzzZXaJaI5eL9QjNiN/DMA2s=
 github.com/spf13/viper v1.18.2 h1:LUXCnvUvSM6FXAsj6nnfc8Q2tp1dIgUfY9Kc8GsSOiQ=
 github.com/spf13/viper v1.18.2/go.mod h1:EKmWIqdnk5lOcmR72yw6hS+8OPYcwD0jteitLMVB+yk=
-github.com/strangelove-ventures/interchaintest/v8 v8.3.0 h1:1XyATc0JkvzDhBS71CdpM5z1t6bmO9PgH/5/nffoM9Q=
-github.com/strangelove-ventures/interchaintest/v8 v8.3.0/go.mod h1:5goHQtgWO9khoUO/SfR//w3uaw/uYVriDR1OY6PyydM=
+github.com/strangelove-ventures/interchaintest/v8 v8.3.1-0.20240510203915-0559b76de4fa h1:4C802Vg9ADUXiw8Nb6iEDoXAmUw0XYvf3rPoSLslfqA=
 github.com/strangelove-ventures/interchaintest/v8 v8.3.1-0.20240510203915-0559b76de4fa/go.mod h1:5goHQtgWO9khoUO/SfR//w3uaw/uYVriDR1OY6PyydM=
 github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
 github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
