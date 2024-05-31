@@ -2,9 +2,10 @@ package feemarket_test
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/suite"
 	"strconv"
 	"testing"
+
+	"github.com/stretchr/testify/suite"
 
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
