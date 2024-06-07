@@ -61,9 +61,9 @@ func (app *App) CreateLanes() (*mev_lane.MEVLane, *blocksdkbase.BaseLane) {
 // blocks pre SDK version 0.47.0.
 //
 // This default lane uses the sdk.Context Priority() function as its lane priority.
-func NewDefaultLane(cfg blocksdkbase.LaneConfig, matchHandler blocksdkbase.MatchHandler) *blocksdkbase.BaseLane {
+func NewDefaultLane(cfg blocksdkbase.LaneConfig) *blocksdkbase.BaseLane {
 	options := []blocksdkbase.LaneOption{
-		blocksdkbase.WithMatchHandler(matchHandler),
+		blocksdkbase.WithMatchHandler(blocksdkbase.DefaultMatchHandler()),
 	}
 
 	lane, err := blocksdkbase.NewBaseLane(
