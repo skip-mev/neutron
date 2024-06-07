@@ -32,7 +32,7 @@ func (app *App) CreateLanes() (*mev_lane.MEVLane, *blocksdkbase.BaseLane) {
 
 	// BaseLane (DefaultLane) is intended to hold all txs that are not matched by any lanes ordered before this
 	// lane.
-	baseLane := base_lane.NewDefaultLane(basecfg, blocksdkbase.DefaultMatchHandler())
+	baseLane := NewDefaultLane(basecfg)
 
 	// initialize the MEV lane, this lane is intended to hold all bid txs
 	factory := mev_lane.NewDefaultAuctionFactory(app.GetTxConfig().TxDecoder(), signer_extraction_adapter.NewDefaultAdapter())
@@ -52,4 +52,35 @@ func (app *App) CreateLanes() (*mev_lane.MEVLane, *blocksdkbase.BaseLane) {
 	)
 
 	return mevLane, baseLane
+}
+
+// NewDefaultLane returns a new default lane. The DefaultLane defines a default
+// lane implementation. The default lane orders transactions by the transaction fees.
+// The default lane accepts any transaction. The default lane builds and verifies blocks
+// in a similar fashion to how the CometBFT/Tendermint consensus engine builds and verifies
+// blocks pre SDK version 0.47.0.
+//
+// This default lane uses the sdk.Context Priority() function as its lane priority.
+func NewDefaultLane(cfg blocksdkbase.LaneConfig, matchHandler blocksdkbase.MatchHandler) *blocksdkbase.BaseLane {
+	options := []blocksdkbase.LaneOption{
+		blocksdkbase.WithMatchHandler(matchHandler),
+	}
+
+	lane, err := blocksdkbase.NewBaseLane(
+		cfg,
+		base_lane.LaneName,
+		options...,
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	lane.LaneMempool = blocksdkbase.NewMempool(
+		// use ctx.Priority based prioritization.
+		blocksdkbase.NewDefaultTxPriority(),
+		cfg.TxEncoder,
+		cfg.SignerExtractor,
+		cfg.MaxTxs,
+	)
+	return lane
 }
