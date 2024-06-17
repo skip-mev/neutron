@@ -175,7 +175,7 @@ distclean: clean
 test: test-unit
 	@rm -rf ./.testchains
 
-test-all: check test-race test-cover
+test-all: test-race test-cover
 
 test-unit:
 	@VERSION=$(VERSION) go test -mod=readonly -tags='ledger test_ledger_mock' ./...
@@ -212,7 +212,7 @@ format:
 	golangci-lint run --fix
 	goimports -w -local github.com/neutron-org .
 
-.PHONY: format
+.PHONY: format lint
 
 ###############################################################################
 ###                                Protobuf                                 ###
