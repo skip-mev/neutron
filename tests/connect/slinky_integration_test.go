@@ -1,7 +1,8 @@
-package slinky_test
+package connect_test
 
 import (
 	"fmt"
+
 	"testing"
 
 	"github.com/cosmos/cosmos-sdk/types/module/testutil"
@@ -14,7 +15,7 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/skip-mev/connect/v2/tests/integration"
+	"github.com/skip-mev/connect/tests/integration/v2"
 	marketmapmodule "github.com/skip-mev/connect/v2/x/marketmap"
 	"github.com/skip-mev/connect/v2/x/oracle"
 )
@@ -99,7 +100,7 @@ var (
 )
 
 func TestSlinkyOracleIntegration(t *testing.T) {
-	baseSuite := integration.NewSlinkyIntegrationSuite(
+	baseSuite := integration.NewConnectIntegrationSuite(
 		spec,
 		oracleImage,
 		integration.WithInterchainConstructor(integration.CCVInterchainConstructor),
@@ -107,11 +108,11 @@ func TestSlinkyOracleIntegration(t *testing.T) {
 		integration.WithDenom(denom),
 	)
 
-	suite.Run(t, integration.NewSlinkyOracleIntegrationSuite(baseSuite))
+	suite.Run(t, integration.NewConnectOracleIntegrationSuite(baseSuite))
 }
 
 func TestSlinkyCCVIntegration(t *testing.T) {
-	s := integration.NewSlinkyCCVIntegrationSuite(
+	s := integration.NewConnectCCVIntegrationSuite(
 		spec,
 		oracleImage,
 		integration.WithInterchainConstructor(integration.CCVInterchainConstructor),
