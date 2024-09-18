@@ -23,18 +23,18 @@ import (
 
 	appconfig "github.com/neutron-org/neutron/v4/app/config"
 
-	"github.com/skip-mev/slinky/abci/strategies/aggregator"
-	"github.com/skip-mev/slinky/x/oracle"
+	"github.com/skip-mev/connect/v2/abci/strategies/aggregator"
+	"github.com/skip-mev/connect/v2/x/oracle"
 
-	oraclepreblock "github.com/skip-mev/slinky/abci/preblock/oracle"
-	slinkyproposals "github.com/skip-mev/slinky/abci/proposals"
-	compression "github.com/skip-mev/slinky/abci/strategies/codec"
-	"github.com/skip-mev/slinky/abci/strategies/currencypair"
-	"github.com/skip-mev/slinky/abci/ve"
-	oracleconfig "github.com/skip-mev/slinky/oracle/config"
-	"github.com/skip-mev/slinky/pkg/math/voteweighted"
-	oracleclient "github.com/skip-mev/slinky/service/clients/oracle"
-	servicemetrics "github.com/skip-mev/slinky/service/metrics"
+	oraclepreblock "github.com/skip-mev/connect/v2/abci/preblock/oracle"
+	slinkyproposals "github.com/skip-mev/connect/v2/abci/proposals"
+	compression "github.com/skip-mev/connect/v2/abci/strategies/codec"
+	"github.com/skip-mev/connect/v2/abci/strategies/currencypair"
+	"github.com/skip-mev/connect/v2/abci/ve"
+	oracleconfig "github.com/skip-mev/connect/v2/oracle/config"
+	"github.com/skip-mev/connect/v2/pkg/math/voteweighted"
+	oracleclient "github.com/skip-mev/connect/v2/service/clients/oracle"
+	servicemetrics "github.com/skip-mev/connect/v2/service/metrics"
 
 	v401 "github.com/neutron-org/neutron/v4/app/upgrades/v4.0.1"
 	"github.com/neutron-org/neutron/v4/x/globalfee"
@@ -207,11 +207,11 @@ import (
 	"github.com/skip-mev/block-sdk/v2/abci/checktx"
 	"github.com/skip-mev/block-sdk/v2/block/base"
 
-	"github.com/skip-mev/slinky/x/marketmap"
-	marketmapkeeper "github.com/skip-mev/slinky/x/marketmap/keeper"
-	marketmaptypes "github.com/skip-mev/slinky/x/marketmap/types"
-	oraclekeeper "github.com/skip-mev/slinky/x/oracle/keeper"
-	oracletypes "github.com/skip-mev/slinky/x/oracle/types"
+	"github.com/skip-mev/connect/v2/x/marketmap"
+	marketmapkeeper "github.com/skip-mev/connect/v2/x/marketmap/keeper"
+	marketmaptypes "github.com/skip-mev/connect/v2/x/marketmap/types"
+	oraclekeeper "github.com/skip-mev/connect/v2/x/oracle/keeper"
+	oracletypes "github.com/skip-mev/connect/v2/x/oracle/types"
 
 	runtimeservices "github.com/cosmos/cosmos-sdk/runtime/services"
 )

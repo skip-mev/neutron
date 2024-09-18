@@ -14,9 +14,9 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/skip-mev/slinky/tests/integration"
-	marketmapmodule "github.com/skip-mev/slinky/x/marketmap"
-	"github.com/skip-mev/slinky/x/oracle"
+	"github.com/skip-mev/connect/v2/tests/integration"
+	marketmapmodule "github.com/skip-mev/connect/v2/x/marketmap"
+	"github.com/skip-mev/connect/v2/x/oracle"
 )
 
 func init() {
